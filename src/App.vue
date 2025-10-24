@@ -104,10 +104,10 @@ watch(globalStats, (val) => {
         <div class="flex items-center justify-between">
           <!-- Logo -->
           <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span class="text-lg">🚀</span>
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+              <span class="text-2xl">🚀</span>
             </div>
-            <span class="text-xl font-bold text-gray-800">矩阵号联盟</span>
+            <span class="text-2xl font-bold text-gray-800">矩阵号联盟</span>
           </div>
           
           <!-- 导航菜单 -->
@@ -172,14 +172,8 @@ watch(globalStats, (val) => {
             <!-- 主标题 -->
             <div class="space-y-3 mb-8">
               <div class="flex items-center justify-center space-x-3 mb-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <span class="text-2xl">🚀</span>
-                </div>
-                <h1 class="text-4xl font-bold text-gray-800">
-                  矩阵号联盟
-                </h1>
                 <!-- 致创作者的信 -->
-                <div class="flex items-center space-x-3 ml-4">
+                <div class="flex items-center space-x-3">
                   <button 
                     @click="showLetterModal = true"
                     class="group relative"
@@ -198,7 +192,6 @@ watch(globalStats, (val) => {
                   </span>
                 </div>
               </div>
-              <p class="text-lg text-gray-600">多账号矩阵涨粉数据管理平台</p>
               <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
                 <span class="flex items-center space-x-1">
                   <div class="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -426,8 +419,10 @@ watch(globalStats, (val) => {
 
 /* 信件样式 */
 .letter-paper {
-  background: linear-gradient(90deg, transparent 0%, transparent 24px, #f0f0f0 25px, #f0f0f0 26px, transparent 27px, transparent 49px, #f0f0f0 50px, #f0f0f0 51px, transparent 52px);
-  background-size: 50px 100%;
+  background: 
+    linear-gradient(90deg, transparent 0%, transparent 24px, #f0f0f0 25px, #f0f0f0 26px, transparent 27px, transparent 49px, #f0f0f0 50px, #f0f0f0 51px, transparent 52px),
+    linear-gradient(0deg, transparent 0%, transparent 24px, #f0f0f0 25px, #f0f0f0 26px, transparent 27px, transparent 49px, #f0f0f0 50px, #f0f0f0 51px, transparent 52px);
+  background-size: 50px 100%, 100% 50px;
   border: 1px solid #d1d5db;
   min-height: 400px;
 }
