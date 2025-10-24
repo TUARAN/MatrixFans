@@ -25,6 +25,9 @@ const navigationItems = [
 // 移动端菜单状态
 const showMobileMenu = ref(false)
 
+// 信件弹窗状态
+const showLetterModal = ref(false)
+
 // 导航方法
 const navigateTo = (path: string) => {
   router.push(path)
@@ -176,22 +179,24 @@ watch(globalStats, (val) => {
                   矩阵号联盟
                 </h1>
                 <!-- 致创作者的信 -->
-                <button 
-                  @click="navigateTo('/letter')"
-                  class="group relative ml-4"
-                >
-                  <div class="animate-bounce">
-                    <div class="w-12 h-10 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
-                      <span class="text-xl text-white">✉️</span>
+                <div class="flex items-center space-x-3 ml-4">
+                  <button 
+                    @click="showLetterModal = true"
+                    class="group relative"
+                  >
+                    <div class="animate-bounce">
+                      <div class="w-12 h-10 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
+                        <span class="text-xl text-white">✉️</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse">
-                    <span class="text-xs">📬</span>
-                  </div>
-                  <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-600 font-medium">
+                    <div class="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse">
+                      <span class="text-xs">📬</span>
+                    </div>
+                  </button>
+                  <span class="text-sm text-gray-600 font-medium whitespace-nowrap">
                     致普通创作者的信
-                  </div>
-                </button>
+                  </span>
+                </div>
               </div>
               <p class="text-lg text-gray-600">多账号矩阵涨粉数据管理平台</p>
               <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
@@ -264,6 +269,138 @@ watch(globalStats, (val) => {
         <!-- 路由视图 -->
         <router-view />
     </div>
+
+    <!-- 信件弹窗 -->
+    <div v-if="showLetterModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" @click="showLetterModal = false">
+      <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full mx-4 max-h-[80vh] overflow-hidden" @click.stop>
+        <!-- 弹窗头部 -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                <span class="text-xl">✉️</span>
+              </div>
+              <div>
+                <h2 class="text-xl font-bold">致普通创作者的信</h2>
+                <p class="text-blue-100 text-sm">矩阵号联盟</p>
+              </div>
+            </div>
+            <button 
+              @click="showLetterModal = false"
+              class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
+            >
+              <span class="text-white text-lg">×</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 信件内容 -->
+        <div class="p-6 max-h-[60vh] overflow-y-auto">
+          <div class="letter-paper bg-white border border-gray-200 p-6 space-y-4">
+            <!-- 问候语 -->
+            <div class="text-lg text-gray-800 leading-relaxed">
+              亲爱的内容创作者朋友们，
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              大家好！我是矩阵号联盟的发起人。今天想和大家分享一个想法，一个关于内容创作新机遇的想法。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              <strong>我们的初衷：从"大V联盟"到"矩阵联盟"</strong>
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              我们都知道，在这个内容为王的时代，单打独斗已经很难在各大平台获得足够的曝光。大V们有他们的圈子，有他们的资源，有他们的影响力。但作为普通的内容创作者，我们是否也能找到属于自己的"联盟"？
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              于是，我想到了"矩阵号联盟"——一个专门为内容创作者打造的互助平台。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              <strong>为什么是"矩阵"？</strong>
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              每个平台都会给每个账号一定的垂直领域流量，这是相对固定的。但突然给某个帖子/文章流量，往往是随机的。这就是我们的机会！
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed font-semibold">
+              1个号，多个平台，坚持发，1-2个月能有1w-10w流量。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              再加上一些"科技狠活"——群里互赞、互相支持，就能形成一个完整的套路。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              <strong>我们的价值主张</strong>
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              1. <strong>多号矩阵运营</strong>：1个号，多平台，垂直领域全覆盖，抓住大模型时代的内容创作机遇，结合平台基础流量和随机推荐机制。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              2. <strong>流量承接与转化</strong>：将随机流量转化为固定关注，通过垂直内容建立用户粘性，最终实现商业价值变现。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              3. <strong>商业闭环</strong>：卖"科技狠活"赚差价，卖"快速起号"课程和案例。1个号，多平台，1w粉丝、5w赞，1个月起号，价值2000+。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              <strong>成功案例参考</strong>
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              就像 HelloGitHub 这样的超级垂直账号，发文就有粘性。用户觉得概念好就点关注，虽然平常不会一直看、转发评论，但这就是垂直内容的魅力。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              <strong>我们的愿景</strong>
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              内容创作要抓住大模型的机会：多号（不同垂直领域，不同内容风格）、多平台（掘金、CSDN、知乎、头条、小红书...）、多垂直领域（编程、AI、职场、科技资讯...）、结合平台流量（基础流量 + 随机推荐）。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              <strong>加入我们</strong>
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              矩阵号联盟不仅仅是一个工具平台，更是一个内容创作者的社区。在这里，我们可以：分享起号经验、互相点赞支持、交流垂直领域心得、共同探索变现路径。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              <strong>抓住时代机遇</strong>
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              现在正是内容创作最好的时代。大模型降低了创作门槛，平台算法给了我们机会，垂直领域让我们有了专业定位。
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed font-semibold">
+              让我们一起，用矩阵的力量，在内容创作的道路上走得更远！
+            </div>
+
+            <div class="text-base text-gray-800 leading-relaxed">
+              期待与你的相遇。
+            </div>
+
+            <!-- 签名 -->
+            <div class="text-right mt-8">
+              <div class="inline-block">
+                <p class="font-bold text-gray-800">矩阵号联盟发起人</p>
+                <p class="text-gray-600 text-sm">2025年10月24日 程序员节</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -285,5 +422,13 @@ watch(globalStats, (val) => {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #2563eb;
+}
+
+/* 信件样式 */
+.letter-paper {
+  background: linear-gradient(transparent 0%, transparent 24px, #e5e5e5 25px, #e5e5e5 26px, transparent 27px, transparent 49px, #e5e5e5 50px, #e5e5e5 51px, transparent 52px);
+  background-size: 100% 50px;
+  border: 1px solid #d1d5db;
+  min-height: 400px;
 }
 </style>
