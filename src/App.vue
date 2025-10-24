@@ -240,6 +240,26 @@ watch(globalStats, (val) => {
                 </div>
               </div>
             </div>
+
+            <!-- 致创作者的信 -->
+            <div class="mt-6 flex justify-center">
+              <button 
+                @click="navigateTo('/letter')"
+                class="group relative"
+              >
+                <div class="animate-bounce">
+                  <div class="w-16 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
+                    <span class="text-2xl text-white">✉️</span>
+                  </div>
+                </div>
+                <div class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse">
+                  <span class="text-xs">📬</span>
+                </div>
+                <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-gray-600 font-medium">
+                  致普通创作者的信
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 

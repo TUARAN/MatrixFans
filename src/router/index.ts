@@ -41,6 +41,11 @@ const router = createRouter({
       path: '/strategy',
       name: '矩阵策略',
       component: () => import('@/views/MatrixStrategyView.vue')
+    },
+    {
+      path: '/letter',
+      name: '致创作者的信',
+      component: () => import('@/views/LetterView.vue')
     }
   ],
 })
