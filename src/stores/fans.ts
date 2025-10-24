@@ -38,7 +38,7 @@ export const useFansStore = defineStore('fans', () => {
       status: 'active',
       platforms: ['csdn', 'juejin', 'toutiao', 'infoq', 'weibo'],
       isMain: true,
-      verticalField: '前端开发'
+      verticalField: '编程领域'
     },
     {
       id: 'anthony404',
@@ -50,7 +50,7 @@ export const useFansStore = defineStore('fans', () => {
       status: 'active',
       platforms: ['xiaohongshu'],
       isMain: false,
-      verticalField: '科技资讯'
+      verticalField: '软件/科技/AI资讯'
     },
     {
       id: 'frontend-weekly',
@@ -62,7 +62,7 @@ export const useFansStore = defineStore('fans', () => {
       status: 'active',
       platforms: ['wechat'],
       isMain: false,
-      verticalField: '前端技术'
+      verticalField: '深度测评以及深度解析'
     },
     {
       id: 'code-ai-frosen',
@@ -74,7 +74,7 @@ export const useFansStore = defineStore('fans', () => {
       status: 'active',
       platforms: ['csdn', '_51cto'],
       isMain: false,
-      verticalField: 'AI/机器学习'
+      verticalField: 'AI大模型'
     },
     {
       id: 'thirty-cube',
@@ -86,7 +86,7 @@ export const useFansStore = defineStore('fans', () => {
       status: 'active',
       platforms: ['zhihu'],
       isMain: false,
-      verticalField: '职场成长'
+      verticalField: '职场发展，生活思考'
     }
   ])
 

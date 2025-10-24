@@ -177,7 +177,7 @@ const getGrowthColor = (growth: number): string => {
             </div>
 
             <div class="flex-1 min-w-0">
-              <div class="flex items-center space-x-3 mb-1">
+              <div class="flex items-center space-x-3 mb-2">
                 <h3 class="text-base font-semibold text-gray-800">{{ account.displayName }}</h3>
                 <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
                   {{ account.status === 'active' ? '活跃' : '暂停' }}
@@ -185,10 +185,16 @@ const getGrowthColor = (growth: number): string => {
                 <span v-if="account.isMain" class="text-xs px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full">
                   主账号
                 </span>
-                <span class="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded-full">
+              </div>
+              
+              <!-- 垂直领域标签 - 突出显示 -->
+              <div class="mb-2">
+                <span class="inline-flex items-center px-3 py-1 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 text-sm font-medium rounded-full border border-purple-200">
+                  <span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
                   {{ account.verticalField }}
                 </span>
               </div>
+              
               <p class="text-gray-600 text-sm mb-2">{{ account.description }}</p>
               
               <!-- 平台标签 -->
