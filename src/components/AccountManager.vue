@@ -19,7 +19,8 @@ const newAccount = ref({
   avatar: '👤',
   themeColor: 'blue',
   platforms: [] as CommunityType[],
-  isMain: false
+  isMain: false,
+  verticalField: ''
 })
 
 // 平台配置
@@ -58,7 +59,8 @@ const openAddModal = () => {
     avatar: '👤',
     themeColor: 'blue',
     platforms: [],
-    isMain: false
+    isMain: false,
+    verticalField: ''
   }
   showAddModal.value = true
 }
@@ -86,7 +88,8 @@ const addAccount = () => {
     themeColor: newAccount.value.themeColor,
     status: 'active',
     platforms: newAccount.value.platforms,
-    isMain: newAccount.value.isMain
+    isMain: newAccount.value.isMain,
+    verticalField: newAccount.value.verticalField || '未分类'
   }
   
   fansStore.matrixAccounts.push(account)
@@ -271,6 +274,16 @@ const togglePlatform = (platform: CommunityType) => {
               rows="2"
               placeholder="输入账号描述"
             ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">垂直领域</label>
+            <input 
+              v-model="newAccount.verticalField"
+              type="text" 
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="如：编程领域、AI大模型、职场发展等"
+            />
           </div>
 
           <!-- 头像和主题色 -->
