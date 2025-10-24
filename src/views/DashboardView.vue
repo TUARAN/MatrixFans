@@ -149,13 +149,13 @@ const getGrowthColor = (growth: number): string => {
 </script>
 
 <template>
-  <div class="h-screen bg-gradient-to-br from-amber-50 to-orange-100 flex flex-col">
+  <div class="h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
     <!-- 页面标题 -->
-    <div class="bg-white/80 backdrop-blur-sm border-b border-amber-200 flex-shrink-0">
+    <div class="bg-white/80 backdrop-blur-sm border-b border-blue-200 flex-shrink-0">
       <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center">
+            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
               <Star class="w-4 h-4 text-white" />
             </div>
             <div>
@@ -167,31 +167,31 @@ const getGrowthColor = (growth: number): string => {
           <!-- 矩阵全览信息 -->
           <div class="hidden lg:flex items-center space-x-6">
             <div class="text-center">
-              <div class="text-xl font-bold text-amber-600">
+              <div class="text-xl font-bold text-blue-600">
                 {{ formatNumber(animatedGlobalFans) }}
               </div>
               <div class="text-gray-600 text-xs">全网粉丝</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold text-orange-600">
+              <div class="text-xl font-bold text-indigo-600">
                 {{ formatNumber(animatedGlobalReads) }}
               </div>
               <div class="text-gray-600 text-xs">全网阅读</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold text-yellow-600">
+              <div class="text-xl font-bold text-purple-600">
                 {{ formatNumber(animatedGlobalLikes) }}
               </div>
               <div class="text-gray-600 text-xs">全网点赞</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold text-amber-700">
+              <div class="text-xl font-bold text-blue-700">
                 {{ animatedGlobalArticles }}
               </div>
               <div class="text-gray-600 text-xs">全网文章</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold text-orange-700">
+              <div class="text-xl font-bold text-indigo-700">
                 {{ animatedGlobalAccounts }}
               </div>
               <div class="text-gray-600 text-xs">矩阵账号</div>
@@ -213,26 +213,26 @@ const getGrowthColor = (growth: number): string => {
         <div 
           v-for="(account, index) in allAccountsData" 
           :key="account.id"
-          class="bg-white rounded-lg border border-amber-200 hover:shadow-md transition-all duration-200"
+          class="bg-white rounded-lg border border-blue-200 hover:shadow-md transition-all duration-200"
         >
           <div class="flex items-center p-4">
             <!-- 排名 -->
-            <div class="flex-shrink-0 w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center mr-4">
+            <div class="flex-shrink-0 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-4">
               <span class="text-white font-bold text-xs">{{ index + 1 }}</span>
             </div>
 
             <!-- 账号信息 -->
-            <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg flex items-center justify-center mr-4">
+            <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center mr-4">
               <span class="text-sm">{{ account.avatar }}</span>
             </div>
 
             <div class="flex-1 min-w-0">
               <div class="flex items-center space-x-3 mb-1">
                 <h3 class="text-base font-semibold text-gray-800">{{ account.displayName }}</h3>
-                <span class="text-xs px-2 py-1 bg-amber-100 text-amber-700 rounded-full">
+                <span class="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
                   {{ account.status === 'active' ? '活跃' : '暂停' }}
                 </span>
-                <span v-if="account.isMain" class="text-xs px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">
+                <span v-if="account.isMain" class="text-xs px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full">
                   主账号
                 </span>
               </div>
@@ -245,7 +245,7 @@ const getGrowthColor = (growth: number): string => {
                   :key="platform"
                   class="flex items-center space-x-1 px-2 py-1 bg-gray-100 rounded text-xs"
                 >
-                  <div class="w-2 h-2 bg-amber-400 rounded-full"></div>
+                  <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
                   <span class="text-gray-600 text-xs">{{ platformConfigs[platform]?.name || platform }}</span>
                 </div>
               </div>
@@ -255,7 +255,7 @@ const getGrowthColor = (growth: number): string => {
             <div class="flex-shrink-0 flex items-center space-x-3 md:space-x-6 ml-3 md:ml-6">
               <!-- 粉丝数 -->
               <div class="text-center">
-                <div class="text-lg md:text-xl font-bold text-amber-600">
+                <div class="text-lg md:text-xl font-bold text-blue-600">
                   {{ formatNumber(account.stats.totalFans) }}
                 </div>
                 <div class="text-gray-500 text-xs">粉丝</div>
@@ -263,7 +263,7 @@ const getGrowthColor = (growth: number): string => {
 
               <!-- 阅读量 -->
               <div class="text-center">
-                <div class="text-lg md:text-xl font-bold text-orange-600">
+                <div class="text-lg md:text-xl font-bold text-indigo-600">
                   {{ formatNumber(account.stats.totalReads) }}
                 </div>
                 <div class="text-gray-500 text-xs">阅读</div>
@@ -271,7 +271,7 @@ const getGrowthColor = (growth: number): string => {
 
               <!-- 点赞量 -->
               <div class="text-center">
-                <div class="text-lg md:text-xl font-bold text-yellow-600">
+                <div class="text-lg md:text-xl font-bold text-purple-600">
                   {{ formatNumber(account.stats.totalLikes) }}
                 </div>
                 <div class="text-gray-500 text-xs">点赞</div>
@@ -279,7 +279,7 @@ const getGrowthColor = (growth: number): string => {
 
               <!-- 文章数 -->
               <div class="text-center">
-                <div class="text-lg md:text-xl font-bold text-amber-700">
+                <div class="text-lg md:text-xl font-bold text-blue-700">
                   {{ account.stats.totalArticles }}
                 </div>
                 <div class="text-gray-500 text-xs">文章</div>
@@ -305,11 +305,11 @@ const getGrowthColor = (growth: number): string => {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f59e0b;
+  background: #3b82f6;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d97706;
+  background: #2563eb;
 }
 </style>

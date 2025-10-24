@@ -94,9 +94,9 @@ watch(globalStats, (val) => {
 </script>
 
 <template>
-  <div id="app" class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100">
+  <div id="app" class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
     <!-- 导航栏 -->
-    <nav class="bg-white/90 backdrop-blur-sm border-b border-amber-200 sticky top-0 z-40">
+    <nav class="bg-white/90 backdrop-blur-sm border-b border-blue-200 sticky top-0 z-40">
       <div class="max-w-6xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           <!-- Logo -->
@@ -104,7 +104,7 @@ watch(globalStats, (val) => {
             <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <span class="text-lg">🚀</span>
             </div>
-            <span class="text-xl font-bold text-gray-800">MatrixFans</span>
+            <span class="text-xl font-bold text-gray-800">矩阵号联盟</span>
           </div>
           
           <!-- 导航菜单 -->
@@ -173,7 +173,7 @@ watch(globalStats, (val) => {
                   <span class="text-2xl">🚀</span>
                 </div>
                 <h1 class="text-4xl font-bold text-gray-800">
-                  MatrixFans
+                  矩阵号联盟
                 </h1>
               </div>
               <p class="text-lg text-gray-600">多账号矩阵涨粉数据管理平台</p>
@@ -196,45 +196,45 @@ watch(globalStats, (val) => {
             <!-- 主要统计卡片 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               <!-- 全网粉丝量 -->
-              <div class="bg-white rounded-2xl p-4 md:p-8 border border-amber-200 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="bg-white rounded-2xl p-4 md:p-8 border border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300">
                 <div class="flex items-center justify-between">
                   <div>
-                    <div class="text-4xl font-bold text-amber-600 mb-2">
+                    <div class="text-4xl font-bold text-blue-600 mb-2">
                       {{ animatedFansDisplay }}
                     </div>
                     <div class="text-gray-600 text-lg font-medium">全网粉丝量</div>
                   </div>
-                  <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
                     <Users class="w-8 h-8 text-white" />
                   </div>
                 </div>
               </div>
 
               <!-- 全网阅读量 -->
-              <div class="bg-white rounded-2xl p-4 md:p-8 border border-orange-200 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="bg-white rounded-2xl p-4 md:p-8 border border-indigo-200 shadow-lg hover:shadow-xl transition-all duration-300">
                 <div class="flex items-center justify-between">
                   <div>
-                    <div class="text-4xl font-bold text-orange-600 mb-2">
+                    <div class="text-4xl font-bold text-indigo-600 mb-2">
                       {{ animatedReadsDisplay }}
                     </div>
                     <div class="text-gray-600 text-lg font-medium">全网阅读量</div>
                   </div>
-                  <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
                     <Eye class="w-8 h-8 text-white" />
                   </div>
                 </div>
               </div>
 
               <!-- 全网点赞量 -->
-              <div class="bg-white rounded-2xl p-4 md:p-8 border border-yellow-200 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div class="bg-white rounded-2xl p-4 md:p-8 border border-purple-200 shadow-lg hover:shadow-xl transition-all duration-300">
                 <div class="flex items-center justify-between">
                   <div>
-                    <div class="text-4xl font-bold text-yellow-600 mb-2">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">
                       {{ animatedLikesDisplay }}
                     </div>
                     <div class="text-gray-600 text-lg font-medium">全网点赞量</div>
                   </div>
-                  <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg">
                     <Sparkles class="w-8 h-8 text-white" />
                   </div>
                 </div>
@@ -261,11 +261,11 @@ watch(globalStats, (val) => {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f59e0b;
+  background: #3b82f6;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d97706;
+  background: #2563eb;
 }
 </style>
