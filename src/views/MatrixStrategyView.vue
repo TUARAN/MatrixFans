@@ -162,20 +162,6 @@ const getCompletionRate = (current: number, goal: number): number => {
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100">
-    <!-- 页面标题 -->
-    <div class="bg-white/80 backdrop-blur-sm border-b border-indigo-200">
-      <div class="max-w-7xl mx-auto px-6 py-4">
-        <div class="flex items-center space-x-3">
-          <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-            <Target class="w-4 h-4 text-white" />
-          </div>
-          <div>
-            <h1 class="text-xl font-bold text-gray-800">矩阵策略规划</h1>
-            <p class="text-gray-600 text-sm">多手机号矩阵运营，垂直领域全覆盖</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- 主要内容 -->
     <div class="max-w-7xl mx-auto px-6 py-6">

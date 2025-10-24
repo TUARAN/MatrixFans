@@ -258,20 +258,6 @@ const getStatusIcon = (status: string) => {
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100">
-    <!-- 页面标题 -->
-    <div class="bg-white/80 backdrop-blur-sm border-b border-purple-200">
-      <div class="max-w-7xl mx-auto px-6 py-4">
-        <div class="flex items-center space-x-3">
-          <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
-            <Megaphone class="w-4 h-4 text-white" />
-          </div>
-          <div>
-            <h1 class="text-xl font-bold text-gray-800">B端推广中心</h1>
-            <p class="text-gray-600 text-sm">多账号矩阵推广，最大化品牌曝光</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- 主要内容 -->
     <div class="max-w-7xl mx-auto px-6 py-6">
