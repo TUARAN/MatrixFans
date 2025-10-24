@@ -175,6 +175,23 @@ watch(globalStats, (val) => {
                 <h1 class="text-4xl font-bold text-gray-800">
                   矩阵号联盟
                 </h1>
+                <!-- 致创作者的信 -->
+                <button 
+                  @click="navigateTo('/letter')"
+                  class="group relative ml-4"
+                >
+                  <div class="animate-bounce">
+                    <div class="w-12 h-10 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
+                      <span class="text-xl text-white">✉️</span>
+                    </div>
+                  </div>
+                  <div class="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse">
+                    <span class="text-xs">📬</span>
+                  </div>
+                  <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-600 font-medium">
+                    致普通创作者的信
+                  </div>
+                </button>
               </div>
               <p class="text-lg text-gray-600">多账号矩阵涨粉数据管理平台</p>
               <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
@@ -241,25 +258,6 @@ watch(globalStats, (val) => {
               </div>
             </div>
 
-            <!-- 致创作者的信 -->
-            <div class="mt-6 flex justify-center">
-              <button 
-                @click="navigateTo('/letter')"
-                class="group relative"
-              >
-                <div class="animate-bounce">
-                  <div class="w-16 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-300 flex items-center justify-center">
-                    <span class="text-2xl text-white">✉️</span>
-                  </div>
-                </div>
-                <div class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center animate-pulse">
-                  <span class="text-xs">📬</span>
-                </div>
-                <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-sm text-gray-600 font-medium">
-                  致普通创作者的信
-                </div>
-              </button>
-            </div>
           </div>
         </div>
 
