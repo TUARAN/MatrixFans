@@ -170,7 +170,7 @@ watch(globalStats, (val) => {
         <div class="relative overflow-hidden">
           <div class="relative z-10 max-w-6xl mx-auto px-6 py-8">
             <!-- 主标题 -->
-            <div class="text-center space-y-3 mb-8">
+            <div class="space-y-3 mb-8">
               <div class="flex items-center justify-center space-x-3 mb-4">
                 <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
                   <span class="text-2xl">🚀</span>
@@ -426,8 +426,8 @@ watch(globalStats, (val) => {
 
 /* 信件样式 */
 .letter-paper {
-  background: linear-gradient(transparent 0%, transparent 24px, #e5e5e5 25px, #e5e5e5 26px, transparent 27px, transparent 49px, #e5e5e5 50px, #e5e5e5 51px, transparent 52px);
-  background-size: 100% 50px;
+  background: linear-gradient(90deg, transparent 0%, transparent 24px, #f0f0f0 25px, #f0f0f0 26px, transparent 27px, transparent 49px, #f0f0f0 50px, #f0f0f0 51px, transparent 52px);
+  background-size: 50px 100%;
   border: 1px solid #d1d5db;
   min-height: 400px;
 }
