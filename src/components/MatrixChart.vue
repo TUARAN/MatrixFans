@@ -28,7 +28,7 @@ use([
 const fansStore = useFansStore()
 
 // 图表类型
-const chartType = ref<'scatter' | 'bar' | 'pie'>('scatter')
+const chartType = ref<'scatter' | 'bar' | 'pie'>('bar')
 
 // 计算属性
 const chartData = computed(() => {
@@ -37,6 +37,7 @@ const chartData = computed(() => {
     const stats = fansStore.getAccountStats(account.id)
     return {
       name: account.displayName,
+      verticalField: account.verticalField,
       fans: stats.totalFans,
       reads: stats.totalReads,
       likes: stats.totalLikes,
@@ -145,11 +146,11 @@ const scatterChartOption = computed(() => {
 // 柱状图配置
 const barChartOption = computed(() => {
   const accounts = chartData.value
-  const categories = accounts.map(acc => acc.name)
+  const categories = accounts.map(acc => `${acc.name}\n${acc.verticalField}`)
   
   return {
     title: {
-      text: '矩阵账号数据对比',
+      text: '矩阵账号数据对比 - 垂直领域分布',
       left: 'center',
       textStyle: {
         fontSize: 16,
@@ -160,6 +161,15 @@ const barChartOption = computed(() => {
       trigger: 'axis',
       axisPointer: {
         type: 'shadow'
+      },
+      formatter: (params: any) => {
+        let result = `<div style="padding: 8px;"><div style="font-weight: bold; margin-bottom: 4px;">${params[0].name.split('\n')[0]}</div>`
+        result += `<div style="color: #666; margin-bottom: 8px;">垂直领域: ${params[0].name.split('\n')[1]}</div>`
+        params.forEach((param: any) => {
+          result += `<div style="margin: 2px 0;">${param.seriesName}: ${param.value.toLocaleString()}</div>`
+        })
+        result += '</div>'
+        return result
       }
     },
     legend: {
@@ -176,7 +186,12 @@ const barChartOption = computed(() => {
       type: 'category',
       data: categories,
       axisLabel: {
-        rotate: 45
+        rotate: 45,
+        formatter: (value: string) => {
+          const parts = value.split('\n')
+          return parts[0] + '\n' + parts[1]
+        },
+        fontSize: 10
       }
     },
     yAxis: {

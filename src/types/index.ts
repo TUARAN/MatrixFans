@@ -29,6 +29,7 @@ export interface MatrixAccount {
   status: 'active' | 'inactive'
   platforms: CommunityType[]
   isMain: boolean
+  verticalField: string
 }
 
 // 账号数据统计

@@ -37,7 +37,8 @@ export const useFansStore = defineStore('fans', () => {
       themeColor: 'orange',
       status: 'active',
       platforms: ['csdn', 'juejin', 'toutiao', 'infoq', 'weibo'],
-      isMain: true
+      isMain: true,
+      verticalField: '前端开发'
     },
     {
       id: 'anthony404',
@@ -48,7 +49,8 @@ export const useFansStore = defineStore('fans', () => {
       themeColor: 'pink',
       status: 'active',
       platforms: ['xiaohongshu'],
-      isMain: false
+      isMain: false,
+      verticalField: '科技资讯'
     },
     {
       id: 'frontend-weekly',
@@ -59,7 +61,8 @@ export const useFansStore = defineStore('fans', () => {
       themeColor: 'green',
       status: 'active',
       platforms: ['wechat'],
-      isMain: false
+      isMain: false,
+      verticalField: '前端技术'
     },
     {
       id: 'code-ai-frosen',
@@ -70,7 +73,8 @@ export const useFansStore = defineStore('fans', () => {
       themeColor: 'amber',
       status: 'active',
       platforms: ['csdn', '_51cto'],
-      isMain: false
+      isMain: false,
+      verticalField: 'AI/机器学习'
     },
     {
       id: 'thirty-cube',
@@ -81,7 +85,8 @@ export const useFansStore = defineStore('fans', () => {
       themeColor: 'blue',
       status: 'active',
       platforms: ['zhihu'],
-      isMain: false
+      isMain: false,
+      verticalField: '职场成长'
     }
   ])
 

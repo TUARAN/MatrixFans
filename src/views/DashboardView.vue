@@ -185,6 +185,9 @@ const getGrowthColor = (growth: number): string => {
                 <span v-if="account.isMain" class="text-xs px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full">
                   主账号
                 </span>
+                <span class="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded-full">
+                  {{ account.verticalField }}
+                </span>
               </div>
               <p class="text-gray-600 text-sm mb-2">{{ account.description }}</p>
               
