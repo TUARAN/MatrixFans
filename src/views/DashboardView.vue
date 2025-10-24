@@ -150,56 +150,6 @@ const getGrowthColor = (growth: number): string => {
 
 <template>
   <div class="h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col">
-    <!-- 页面标题 -->
-    <div class="bg-white/80 backdrop-blur-sm border-b border-blue-200 flex-shrink-0">
-      <div class="max-w-7xl mx-auto px-6 py-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
-              <Star class="w-4 h-4 text-white" />
-            </div>
-            <div>
-              <h1 class="text-xl font-bold text-gray-800">矩阵账号数据总览</h1>
-              <p class="text-gray-600 text-sm">多账号矩阵数据一览，按粉丝数量排序</p>
-            </div>
-          </div>
-          
-          <!-- 矩阵全览信息 -->
-          <div class="hidden lg:flex items-center space-x-6">
-            <div class="text-center">
-              <div class="text-xl font-bold text-blue-600">
-                {{ formatNumber(animatedGlobalFans) }}
-              </div>
-              <div class="text-gray-600 text-xs">全网粉丝</div>
-            </div>
-            <div class="text-center">
-              <div class="text-xl font-bold text-indigo-600">
-                {{ formatNumber(animatedGlobalReads) }}
-              </div>
-              <div class="text-gray-600 text-xs">全网阅读</div>
-            </div>
-            <div class="text-center">
-              <div class="text-xl font-bold text-purple-600">
-                {{ formatNumber(animatedGlobalLikes) }}
-              </div>
-              <div class="text-gray-600 text-xs">全网点赞</div>
-            </div>
-            <div class="text-center">
-              <div class="text-xl font-bold text-blue-700">
-                {{ animatedGlobalArticles }}
-              </div>
-              <div class="text-gray-600 text-xs">全网文章</div>
-            </div>
-            <div class="text-center">
-              <div class="text-xl font-bold text-indigo-700">
-                {{ animatedGlobalAccounts }}
-              </div>
-              <div class="text-gray-600 text-xs">矩阵账号</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- 主要内容 -->
     <div class="flex-1 max-w-7xl mx-auto px-6 py-6 w-full">
