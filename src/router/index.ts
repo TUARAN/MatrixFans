@@ -26,6 +26,21 @@ const router = createRouter({
       path: '/plan/:platform/:account',
       name: '平台计划',
       component: () => import('@/views/PlatformPlanView.vue')
+    },
+    {
+      path: '/conversion',
+      name: '流量转化',
+      component: () => import('@/views/TrafficConversionView.vue')
+    },
+    {
+      path: '/promotion',
+      name: 'B端推广',
+      component: () => import('@/views/B2BPromotionView.vue')
+    },
+    {
+      path: '/strategy',
+      name: '矩阵策略',
+      component: () => import('@/views/MatrixStrategyView.vue')
     }
   ],
 })

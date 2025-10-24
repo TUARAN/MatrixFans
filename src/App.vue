@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useFansStore } from '@/stores/fans'
 import { computed, ref, watch, onMounted } from 'vue'
-import { Users, Eye, Sparkles, Zap, BarChart3, Settings, Home, Globe } from 'lucide-vue-next'
+import { Users, Eye, Sparkles, Zap, BarChart3, Settings, Home, Globe, TrendingUp, Megaphone, Target } from 'lucide-vue-next'
 import { useRouter, useRoute } from 'vue-router'
 
 const fansStore = useFansStore()
@@ -15,9 +15,11 @@ const globalStats = computed(() => fansStore.globalStats)
 // 导航菜单
 const navigationItems = [
   { name: '数据总览', path: '/', icon: Home },
+  { name: '矩阵策略', path: '/strategy', icon: Target },
+  { name: '流量转化', path: '/conversion', icon: TrendingUp },
+  { name: 'B端推广', path: '/promotion', icon: Megaphone },
   { name: '账号管理', path: '/accounts', icon: Settings },
-  { name: '平台配置', path: '/platforms', icon: Globe },
-  { name: '平台计划', path: '/plan', icon: BarChart3 }
+  { name: '平台配置', path: '/platforms', icon: Globe }
 ]
 
 // 移动端菜单状态
