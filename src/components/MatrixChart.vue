@@ -3,7 +3,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useFansStore } from '@/stores/fans'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
-import { LineChart, BarChart, PieChart } from 'echarts/charts'
+import { LineChart, BarChart, PieChart, ScatterChart } from 'echarts/charts'
 import {
   TitleComponent,
   TooltipComponent,
@@ -18,6 +18,7 @@ use([
   LineChart,
   BarChart,
   PieChart,
+  ScatterChart,
   TitleComponent,
   TooltipComponent,
   LegendComponent,
@@ -27,7 +28,7 @@ use([
 const fansStore = useFansStore()
 
 // 图表类型
-const chartType = ref<'line' | 'bar' | 'pie'>('line')
+const chartType = ref<'scatter' | 'bar' | 'pie'>('scatter')
 
 // 计算属性
 const chartData = computed(() => {
@@ -62,14 +63,13 @@ const getAccountColor = (themeColor: string): string => {
   return colorMap[themeColor] || '#3b82f6'
 }
 
-// 折线图配置
-const lineChartOption = computed(() => {
+// 散点图配置 - 展示账号间的数据关系
+const scatterChartOption = computed(() => {
   const accounts = chartData.value
-  const categories = accounts.map(acc => acc.name)
   
   return {
     title: {
-      text: '矩阵账号粉丝增长趋势',
+      text: '矩阵账号数据分布',
       left: 'center',
       textStyle: {
         fontSize: 16,
@@ -77,13 +77,21 @@ const lineChartOption = computed(() => {
       }
     },
     tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'cross'
+      trigger: 'item',
+      formatter: (params: any) => {
+        const data = params.data
+        return `
+          <div style="padding: 8px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">${data.name}</div>
+            <div>粉丝数: ${data.value[1].toLocaleString()}</div>
+            <div>阅读量: ${data.value[2].toLocaleString()}</div>
+            <div>点赞量: ${data.value[3].toLocaleString()}</div>
+          </div>
+        `
       }
     },
     legend: {
-      data: ['粉丝数', '阅读量', '点赞量'],
+      data: ['账号数据点'],
       top: 30
     },
     grid: {
@@ -93,54 +101,41 @@ const lineChartOption = computed(() => {
       containLabel: true
     },
     xAxis: {
-      type: 'category',
-      data: categories,
-      axisLabel: {
-        rotate: 45
-      }
+      type: 'value',
+      name: '粉丝数',
+      nameLocation: 'middle',
+      nameGap: 30
     },
     yAxis: {
       type: 'value',
-      name: '数量'
+      name: '阅读量',
+      nameLocation: 'middle',
+      nameGap: 50
     },
     series: [
       {
-        name: '粉丝数',
-        type: 'line',
-        data: accounts.map(acc => acc.fans),
-        smooth: true,
-        lineStyle: {
-          color: '#3b82f6',
-          width: 3
-        },
+        name: '账号数据点',
+        type: 'scatter',
+        data: accounts.map((acc, index) => [
+          acc.fans,
+          Math.round(acc.reads / 1000),
+          Math.round(acc.likes / 1000),
+          acc.articles,
+          acc.name
+        ]),
+        symbolSize: (data: any) => Math.max(20, Math.min(60, data[2] / 10)),
         itemStyle: {
-          color: '#3b82f6'
-        }
-      },
-      {
-        name: '阅读量',
-        type: 'line',
-        data: accounts.map(acc => Math.round(acc.reads / 1000)),
-        smooth: true,
-        lineStyle: {
-          color: '#10b981',
-          width: 3
+          color: (params: any) => {
+            const colors = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899']
+            return colors[params.dataIndex % colors.length]
+          }
         },
-        itemStyle: {
-          color: '#10b981'
-        }
-      },
-      {
-        name: '点赞量',
-        type: 'line',
-        data: accounts.map(acc => Math.round(acc.likes / 1000)),
-        smooth: true,
-        lineStyle: {
-          color: '#f59e0b',
-          width: 3
-        },
-        itemStyle: {
-          color: '#f59e0b'
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
         }
       }
     ]
@@ -275,19 +270,19 @@ const pieChartOption = computed(() => {
 // 当前图表配置
 const currentChartOption = computed(() => {
   switch (chartType.value) {
-    case 'line':
-      return lineChartOption.value
+    case 'scatter':
+      return scatterChartOption.value
     case 'bar':
       return barChartOption.value
     case 'pie':
       return pieChartOption.value
     default:
-      return lineChartOption.value
+      return scatterChartOption.value
   }
 })
 
 // 切换图表类型
-const switchChartType = (type: 'line' | 'bar' | 'pie') => {
+const switchChartType = (type: 'scatter' | 'bar' | 'pie') => {
   chartType.value = type
 }
 </script>
@@ -309,14 +304,14 @@ const switchChartType = (type: 'line' | 'bar' | 'pie') => {
       <!-- 图表类型切换 -->
       <div class="flex items-center space-x-2">
         <button 
-          @click="switchChartType('line')"
+          @click="switchChartType('scatter')"
           :class="`px-3 py-1 rounded-lg text-sm font-medium transition-all duration-200 ${
-            chartType === 'line' 
+            chartType === 'scatter' 
               ? 'bg-blue-500 text-white shadow-md' 
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`"
         >
-          趋势图
+          分布图
         </button>
         <button 
           @click="switchChartType('bar')"
@@ -336,7 +331,7 @@ const switchChartType = (type: 'line' | 'bar' | 'pie') => {
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`"
         >
-          分布图
+          饼图
         </button>
       </div>
     </div>
