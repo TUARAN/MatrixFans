@@ -94,6 +94,22 @@ watch(globalStats, (val) => {
   animateTo(val.totalReads, animatedReads)
   animateTo(val.totalLikes, animatedLikes)
 })
+
+// 生成粒子样式
+const getParticleStyle = (index: number) => {
+  const size = Math.random() * 4 + 2 // 2-6px
+  const left = Math.random() * 100 // 0-100%
+  const animationDelay = Math.random() * 3 // 0-3s
+  const animationDuration = Math.random() * 3 + 4 // 4-7s
+  
+  return {
+    width: `${size}px`,
+    height: `${size}px`,
+    left: `${left}%`,
+    animationDelay: `${animationDelay}s`,
+    animationDuration: `${animationDuration}s`
+  }
+}
 </script>
 
 <template>
@@ -103,11 +119,16 @@ watch(globalStats, (val) => {
       <div class="max-w-6xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           <!-- Logo -->
-          <div class="flex items-center space-x-3">
-            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-              <span class="text-2xl">🚀</span>
+          <div class="flex items-center space-x-4">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+              <span class="text-3xl animate-pulse">🚀</span>
             </div>
-            <span class="text-2xl font-bold text-gray-800">矩阵号联盟</span>
+            <div class="flex flex-col">
+              <span class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 cursor-default">
+                矩阵号联盟
+              </span>
+              <span class="text-xs text-gray-500 font-medium tracking-wider">MATRIX ALLIANCE</span>
+            </div>
           </div>
           
           <!-- 导航菜单 -->
@@ -166,8 +187,14 @@ watch(globalStats, (val) => {
 
     <!-- 主内容区域 -->
     <div class="min-h-screen">
-        <!-- 极简Banner区域 -->
-        <div class="relative overflow-hidden">
+        <!-- 极简Banner区域 - 只在数据总览页面显示 -->
+        <div v-if="route.path === '/'" class="relative overflow-hidden">
+          <!-- 粒子背景动效 -->
+          <div class="absolute inset-0 z-0">
+            <div class="particles-container">
+              <div v-for="i in 20" :key="i" class="particle" :style="getParticleStyle(i)"></div>
+            </div>
+          </div>
           <div class="relative z-10 max-w-6xl mx-auto px-6 py-8">
             <!-- 主标题 -->
             <div class="space-y-3 mb-8">
@@ -187,9 +214,12 @@ watch(globalStats, (val) => {
                       <span class="text-xs">📬</span>
                     </div>
                   </button>
-                  <span class="text-sm text-gray-600 font-medium whitespace-nowrap">
+                  <button 
+                    @click="showLetterModal = true"
+                    class="text-sm text-gray-600 font-medium whitespace-nowrap hover:text-blue-600 transition-colors duration-200 cursor-pointer"
+                  >
                     致普通创作者的信
-                  </span>
+                  </button>
                 </div>
               </div>
               <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
@@ -425,5 +455,41 @@ watch(globalStats, (val) => {
   background-size: 50px 100%, 100% 50px;
   border: 1px solid #d1d5db;
   min-height: 400px;
+}
+
+/* 粒子动画 */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: floatUp linear infinite;
+  bottom: -10px;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 </style>
