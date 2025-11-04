@@ -95,7 +95,7 @@ const accountAllocation = ref([
     phoneNumber: '187****1234',
     accounts: [
       { name: '掘金安东尼', field: '前端开发', platform: 'juejin', followers: 10871, status: 'active' },
-      { name: '安东尼404', field: '科技资讯', platform: 'xiaohongshu', followers: 2400, status: 'active' },
+      { name: '安东尼404', field: '科技资讯', platform: 'xiaohongshu', followers: 4576, status: 'active' },
       { name: '前端周看', field: '前端开发', platform: 'wechat', followers: 3500, status: 'active' }
     ]
   },

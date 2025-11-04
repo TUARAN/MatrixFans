@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { useFansStore } from '@/stores/fans'
+import { useAuthStore } from '@/stores/auth'
 import { computed, ref, watch, onMounted } from 'vue'
-import { Users, Eye, Sparkles, Zap, BarChart3, Settings, Home, Globe, TrendingUp, Megaphone, Target } from 'lucide-vue-next'
+import { Users, Eye, Sparkles, Zap, BarChart3, Settings, Home, Globe, TrendingUp, Megaphone, Target, LogIn, LogOut, User } from 'lucide-vue-next'
 import { useRouter, useRoute } from 'vue-router'
+import LoginModal from '@/components/LoginModal.vue'
 
 const fansStore = useFansStore()
+const authStore = useAuthStore()
 const router = useRouter()
 const route = useRoute()
 
@@ -12,21 +15,32 @@ const route = useRoute()
 const activeAccount = computed(() => fansStore.currentSelectedAccount)
 const globalStats = computed(() => fansStore.globalStats)
 
-// 导航菜单
-const navigationItems = [
-  { name: '数据总览', path: '/', icon: Home },
-  { name: '矩阵策略', path: '/strategy', icon: Target },
-  { name: '流量转化', path: '/conversion', icon: TrendingUp },
-  { name: 'B端推广', path: '/promotion', icon: Megaphone },
-  { name: '账号管理', path: '/accounts', icon: Settings },
-  { name: '平台配置', path: '/platforms', icon: Globe }
+// 导航菜单配置（数据总览不显示在导航菜单中，只通过Logo点击访问）
+const allNavigationItems = [
+  { name: '矩阵策略', path: '/strategy', icon: Target, requiresAuth: true },
+  { name: '流量转化', path: '/conversion', icon: TrendingUp, requiresAuth: true },
+  { name: 'B端推广', path: '/promotion', icon: Megaphone, requiresAuth: true },
+  { name: '账号管理', path: '/accounts', icon: Settings, requiresAuth: true },
+  { name: '平台配置', path: '/platforms', icon: Globe, requiresAuth: true }
 ]
+
+// 根据登录状态过滤导航菜单
+const navigationItems = computed(() => {
+  if (authStore.isAuthenticated) {
+    return allNavigationItems
+  }
+  // 未登录时不显示需要登录的菜单项
+  return []
+})
 
 // 移动端菜单状态
 const showMobileMenu = ref(false)
 
 // 信件弹窗状态
 const showLetterModal = ref(false)
+
+// 登录弹窗状态
+const showLoginModal = ref(false)
 
 // 导航方法
 const navigateTo = (path: string) => {
@@ -37,6 +51,19 @@ const navigateTo = (path: string) => {
 // 切换移动端菜单
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
+}
+
+// 登录成功回调
+const handleLoginSuccess = () => {
+  showLoginModal.value = false
+}
+
+// 退出登录
+const handleLogout = () => {
+  authStore.logout()
+  if (route.meta.requiresAuth) {
+    router.push('/')
+  }
 }
 
 // 获取各账号统计数据
@@ -119,17 +146,20 @@ const getParticleStyle = (index: number) => {
       <div class="max-w-6xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           <!-- Logo -->
-          <div class="flex items-center space-x-4">
+          <button 
+            @click="navigateTo('/')"
+            class="flex items-center space-x-4 hover:opacity-80 transition-opacity"
+          >
             <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <span class="text-3xl animate-pulse">🚀</span>
             </div>
             <div class="flex flex-col">
-              <span class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 cursor-default">
-                矩阵号联盟
+              <span class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
+                TUARAN-KOLs
               </span>
               <span class="text-xs text-gray-500 font-medium tracking-wider">MATRIX ALLIANCE</span>
             </div>
-          </div>
+          </button>
           
           <!-- 导航菜单 -->
           <div class="hidden md:flex items-center space-x-1">
@@ -146,10 +176,54 @@ const getParticleStyle = (index: number) => {
               <component :is="item.icon" class="w-4 h-4" />
               <span class="text-sm font-medium">{{ item.name }}</span>
             </button>
+            
+            <!-- 登录/用户信息 -->
+            <div class="ml-2 flex items-center">
+              <div v-if="authStore.isAuthenticated" class="flex items-center space-x-2">
+                <div class="flex items-center space-x-2 px-3 py-2 bg-green-50 text-green-700 rounded-lg">
+                  <User class="w-4 h-4" />
+                  <span class="text-sm font-medium">{{ authStore.user?.username }}</span>
+                </div>
+                <button
+                  @click="handleLogout"
+                  class="flex items-center space-x-2 px-3 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all duration-200"
+                  title="退出登录"
+                >
+                  <LogOut class="w-4 h-4" />
+                </button>
+              </div>
+              <button
+                v-else
+                @click="showLoginModal = true"
+                class="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"
+              >
+                <LogIn class="w-4 h-4" />
+                <span class="text-sm font-medium">登录</span>
+              </button>
+            </div>
           </div>
           
-          <!-- 移动端菜单按钮 -->
-          <div class="md:hidden">
+          <!-- 移动端菜单按钮和登录按钮 -->
+          <div class="md:hidden flex items-center space-x-2">
+            <button
+              v-if="!authStore.isAuthenticated"
+              @click="showLoginModal = true"
+              class="p-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-md"
+            >
+              <LogIn class="w-5 h-5" />
+            </button>
+            <div v-else class="flex items-center space-x-1">
+              <div class="px-2 py-1 bg-green-50 text-green-700 rounded text-xs">
+                {{ authStore.user?.username }}
+              </div>
+              <button
+                @click="handleLogout"
+                class="p-2 text-gray-600 hover:text-gray-800 transition-colors"
+                title="退出登录"
+              >
+                <LogOut class="w-5 h-5" />
+              </button>
+            </div>
             <button 
               @click="toggleMobileMenu"
               class="p-2 text-gray-600 hover:text-gray-800 transition-colors"
@@ -219,6 +293,18 @@ const getParticleStyle = (index: number) => {
                     class="text-sm text-gray-600 font-medium whitespace-nowrap hover:text-blue-600 transition-colors duration-200 cursor-pointer"
                   >
                     致普通创作者的信
+                  </button>
+                </div>
+                
+                <!-- 登录入口（未登录时显示） -->
+                <div v-if="!authStore.isAuthenticated" class="flex items-center space-x-2">
+                  <div class="h-6 w-px bg-gray-300"></div>
+                  <button
+                    @click="showLoginModal = true"
+                    class="flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg"
+                  >
+                    <LogIn class="w-3.5 h-3.5" />
+                    <span>登录查看核心数据</span>
                   </button>
                 </div>
               </div>
@@ -293,6 +379,13 @@ const getParticleStyle = (index: number) => {
         <router-view />
     </div>
 
+    <!-- 登录弹窗 -->
+    <LoginModal 
+      v-if="showLoginModal"
+      @close="showLoginModal = false"
+      @success="handleLoginSuccess"
+    />
+
     <!-- 信件弹窗 -->
     <div v-if="showLetterModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" @click="showLetterModal = false">
       <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full mx-4 max-h-[80vh] overflow-hidden" @click.stop>
@@ -305,7 +398,7 @@ const getParticleStyle = (index: number) => {
               </div>
               <div>
                 <h2 class="text-xl font-bold">致普通创作者的信</h2>
-                <p class="text-blue-100 text-sm">矩阵号联盟</p>
+                <p class="text-blue-100 text-sm">TUARAN-KOLs</p>
               </div>
             </div>
             <button 
@@ -330,7 +423,7 @@ const getParticleStyle = (index: number) => {
             </div>
 
             <div class="text-base text-gray-800 leading-relaxed">
-              <strong>我们的初衷：从"大V联盟"到"矩阵联盟"</strong>
+              <strong>我们的初衷：从"大V联盟"到"矩阵号联盟"</strong>
             </div>
 
             <div class="text-base text-gray-800 leading-relaxed">
@@ -416,7 +509,7 @@ const getParticleStyle = (index: number) => {
             <!-- 签名 -->
             <div class="text-right mt-8">
               <div class="inline-block">
-                <p class="font-bold text-gray-800">矩阵号联盟发起人</p>
+                <p class="font-bold text-gray-800">矩阵号联盟发起人：安东尼</p>
                 <p class="text-gray-600 text-sm">2025年10月24日 程序员节</p>
               </div>
             </div>

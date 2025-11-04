@@ -767,9 +767,9 @@ export const usePlansStore = defineStore('plans', () => {
       xiaohongshu: {
         platform: 'xiaohongshu',
         currentStatus: {
-          fans: 2400,
+          fans: 4576,
           reads: 100000,
-          articles: 50,
+          articles: 100,
           level: '活跃创作者'
         },
         goals: {

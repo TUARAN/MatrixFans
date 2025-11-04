@@ -38,7 +38,7 @@ const goBack = () => {
           </div>
 
           <div class="text-base text-gray-800 leading-relaxed">
-            <strong>我们的初衷：从"大V联盟"到"矩阵联盟"</strong>
+            <strong>我们的初衷：从"大V联盟"到"矩阵号联盟"</strong>
           </div>
 
           <div class="text-base text-gray-800 leading-relaxed">
@@ -124,7 +124,7 @@ const goBack = () => {
           <!-- 签名 -->
           <div class="text-right mt-8">
             <div class="inline-block">
-              <p class="font-bold text-gray-800">矩阵号联盟发起人</p>
+              <p class="font-bold text-gray-800">矩阵号联盟发起人：安东尼</p>
               <p class="text-gray-600 text-sm">2025年10月24日 程序员节</p>
             </div>
           </div>

@@ -370,7 +370,7 @@ const switchChartType = (type: 'scatter' | 'bar' | 'pie') => {
         <div class="text-2xl font-bold text-purple-600">
           {{ chartData.reduce((sum, acc) => sum + acc.articles, 0) }}
         </div>
-        <div class="text-sm text-purple-600">总文章数</div>
+        <div class="text-sm text-purple-600">总内容数</div>
       </div>
     </div>
   </div>

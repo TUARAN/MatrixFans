@@ -221,7 +221,7 @@ const getGrowthColor = (growth: number): string => {
               </div>
 
               <!-- 阅读量 -->
-              <div class="text-center">
+              <div v-if="account.id !== 'wechat-community'" class="text-center">
                 <div class="text-lg md:text-xl font-bold text-indigo-600">
                   {{ formatNumber(account.stats.totalReads) }}
                 </div>
@@ -229,19 +229,21 @@ const getGrowthColor = (growth: number): string => {
               </div>
 
               <!-- 点赞量 -->
-              <div class="text-center">
+              <div v-if="account.id !== 'wechat-community'" class="text-center">
                 <div class="text-lg md:text-xl font-bold text-purple-600">
                   {{ formatNumber(account.stats.totalLikes) }}
                 </div>
                 <div class="text-gray-500 text-xs">点赞</div>
               </div>
 
-              <!-- 文章数 -->
-              <div class="text-center">
+              <!-- 文章数/帖子数 -->
+              <div v-if="account.id !== 'wechat-community'" class="text-center">
                 <div class="text-lg md:text-xl font-bold text-blue-700">
                   {{ account.stats.totalArticles }}
                 </div>
-                <div class="text-gray-500 text-xs">文章</div>
+                <div class="text-gray-500 text-xs">
+                  {{ account.platforms.includes('xiaohongshu') && account.platforms.length === 1 ? '帖子' : '文章' }}
+                </div>
               </div>
             </div>
           </div>

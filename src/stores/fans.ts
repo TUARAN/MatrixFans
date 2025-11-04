@@ -87,6 +87,18 @@ export const useFansStore = defineStore('fans', () => {
       platforms: ['zhihu'],
       isMain: false,
       verticalField: '职场发展，生活思考'
+    },
+    {
+      id: 'wechat-community',
+      name: '微信社群',
+      displayName: '微信社群',
+      description: '2个社群：资讯讨论群 | 抽奖福利群',
+      avatar: '💬',
+      themeColor: 'teal',
+      status: 'active',
+      platforms: ['wechat'],
+      isMain: false,
+      verticalField: '社群运营'
     }
   ])
 
@@ -521,13 +533,30 @@ export const useFansStore = defineStore('fans', () => {
         date: today,
         accountId: 'anthony404',
         community: 'xiaohongshu',
-        fansCount: 2400,
+        fansCount: 4576,
         readCount: 100000,
-        articleCount: 25,
-        likeCount: generateLikeCount(2400),
+        articleCount: 100,
+        likeCount: generateLikeCount(4576),
         dailyFansGrowth: 30,
         dailyReadGrowth: 0,
         dailyLikeGrowth: 12
+      }
+    ]
+
+    // 微信社群账号数据
+    const wechatCommunityData: FanData[] = [
+      {
+        id: 'wechat-community-1',
+        date: today,
+        accountId: 'wechat-community',
+        community: 'wechat',
+        fansCount: 350,
+        readCount: 0,
+        articleCount: 0,
+        likeCount: generateLikeCount(350),
+        dailyFansGrowth: 5,
+        dailyReadGrowth: 0,
+        dailyLikeGrowth: 2
       }
     ]
 
@@ -536,7 +565,8 @@ export const useFansStore = defineStore('fans', () => {
       ...aifsData,
       ...thirtyCubeData,
       ...frontendWeeklyData,
-      ...anthony404Data
+      ...anthony404Data,
+      ...wechatCommunityData
     )
   }
 
